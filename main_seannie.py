@@ -126,35 +126,36 @@ for i in userInfoList.index:
                 closeOrder = orderApi.place_order(symbol, marginCoin, size=short_qty, side='close_short', orderType='market', timeInForceValue='normal')
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 롱진입 closeorder 오류')
-            
+                telegramMsg = name + ' 롱진입 closeorder 오류'
             
             try:
                 size = get_size(productType)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 롱진입 size 계산 오류')
+                telegramMsg = name + ' 롱진입 size 계산 오류'
             
             try:
-                openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_long', orderType='market', timeInForceValue='normal')
+                openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_long', 
+                    orderType='market', timeInForceValue='normal')
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
-                telegramMsg = name +'\n숏 청산 완료\n' + '숏 청산 AvgPrice : $' + str(closeOrderPrice) + '\n------------------------------\n롱 진입 완료\n' + '롱 진입 AvgPrice : $'+ str(openOrderPrice)
+                telegramMsg = (name +'\n숏 청산 완료\n' + '숏 청산 AvgPrice : $' 
+                    + str(closeOrderPrice) + '\n------------------------------\n롱 진입 완료\n' 
+                    + '롱 진입 AvgPrice : $'+ str(openOrderPrice))
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 롱진입 openorder 오류')
+                telegramMsg = name + ' 롱진입 openorder 오류'
             
         else:
             try:
                 size = get_size(productType)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 롱진입 size 계산 오류 002')
+                telegramMsg = name + ' 롱진입 openorder 오류 002'
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_long', orderType='market', timeInForceValue='normal')
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
                 telegramMsg = name +'\n롱 진입 완료\n' + '롱 진입 AvgPrice : $'+ str(openOrderPrice)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 롱진입 openorder 오류 002')
+                telegramMsg = name + ' 롱진입 openorder 오류 002'
             
-    
         bot.sendMessage(chat_id=chat_id, text=telegramMsg)  
 
     #숏 진입
@@ -167,32 +168,34 @@ for i in userInfoList.index:
                 closeOrder = orderApi.place_order(symbol, marginCoin, size=long_qty, side='close_long', orderType='market', timeInForceValue='normal')
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 숏 진입 closeorder 오류')
+                telegramMsg = name + ' 숏 진입 closeorder 오류'
             
             try:
                 size = get_size(productType)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 숏 진입 size 계산 오류')
+                telegramMsg = name + ' 숏 진입 size 계산 오류'
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_short', orderType='market', timeInForceValue='normal')
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
-                telegramMsg = name +'\n롱 청산 완료\n' + '롱 청산 AvgPrice : $' + str(closeOrderPrice) + '\n------------------------------\n숏 진입 완료\n' + '숏 진입 AvgPrice : $'+ str(openOrderPrice)
+                telegramMsg = (name +'\n롱 청산 완료\n' + '롱 청산 AvgPrice : $' + 
+                    str(closeOrderPrice) + '\n------------------------------\n숏 진입 완료\n' 
+                    + '숏 진입 AvgPrice : $'+ str(openOrderPrice))
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 숏 진입 openorder 오류')
+                telegramMsg = name + ' 숏 진입 openorder 오류'
                 
         else:
             try:
                 size = get_size(productType)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 숏 진입 size 계산 오류 002')
+                telegramMsg = name + ' 숏 진입 size 계산 오류 002'
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_short', orderType='market', timeInForceValue='normal')
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
                 telegramMsg = name +'\n숏 진입 완료\n' + '숏 진입 AvgPrice : $'+ str(openOrderPrice)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 숏 진입 openorder 오류 002')
+                telegramMsg = name + ' 숏 진입 openorder 오류 002'
                 
         bot.sendMessage(chat_id=chat_id, text=telegramMsg)  
 
@@ -205,13 +208,13 @@ for i in userInfoList.index:
             try:
                 closeOrder = orderApi.place_order(symbol, marginCoin, size=long_qty, side='close_long', orderType='market', timeInForceValue='normal')    
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 롱 종료 closeOrder 오류')
+                telegramMsg = name + ' 롱 종료 closeOrder 오류'
                 
             try:
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
                 telegramMsg = name +'\n롱 청산 완료\n' + '롱 청산 AvgPrice : $' + str(closeOrderPrice)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 롱 종료 closeOrderPrice 오류')
+                telegramMsg = name + ' 롱 종료 closeOrderPrice 오류'
             
         bot.sendMessage(chat_id = chat_id, text=telegramMsg)
 
@@ -224,14 +227,13 @@ for i in userInfoList.index:
             try:
                 closeOrder = orderApi.place_order(symbol, marginCoin, size=short_qty, side='close_short', orderType='market', timeInForceValue='normal')    
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 숏 종료 closeOrder 오류')
+                telegramMsg = name + ' 숏 종료 closeOrder 오류'
                 
             try:
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
                 telegramMsg = name +'\n숏 청산 완료\n' + '숏 청산 AvgPrice : $' + str(closeOrderPrice)
             except:
-                bot.sendMessage(chat_id = chat_id, text=name + ' 숏 종료 closeOrderPrice 오류')
-            
+                telegramMsg = name + ' 숏 종료 closeOrderPrice 오류'
                 
         bot.sendMessage(chat_id = chat_id, text=telegramMsg)
 
