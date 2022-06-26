@@ -4,6 +4,7 @@ import pickle
 import pandas as pd
 #import pprint
 import my_key_raw
+import time
 import bitget.mix.market_api as market
 import bitget.mix.account_api as accounts
 import bitget.mix.position_api as position
@@ -94,7 +95,7 @@ for i in userInfoList.index:
             #print('can buy : ',size,'BTC')
             return size
     ################################################################################################################
-
+        time.sleep(0.05)
         #롱진입
         if data['side'] == "longentry":
             if(float(long_qty)!=0):
