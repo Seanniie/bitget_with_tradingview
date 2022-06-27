@@ -16,9 +16,7 @@ import telegram
 # import ende_key  #암복호화키
 # import my_key    # 시크릿 액세스키
 
-bot = telegram.Bot(token='123:AAF3oscLU5z2rDzPFYd_oVe8eIjf7UqF-aA')
-chat_id = -123
-#chat_id = 123
+######
 
 #레버리지
 leverage = 1
@@ -96,6 +94,7 @@ for i in userInfoList.index:
     #주문 평단 계산
     def get_dealAvgPrice(orderId):
         try:
+            time.sleep(0.05)
             openOrderDetail = orderApi.detail(symbol, orderId)
             avgprice = openOrderDetail['data']['priceAvg']
             return avgprice
@@ -144,10 +143,11 @@ for i in userInfoList.index:
                 telegramMsg = name + ' 롱진입 openorder 오류'
             
         else:
+            
             try:
                 size = get_size(productType)
             except:
-                telegramMsg = name + ' 롱진입 openorder 오류 002'
+                telegramMsg = name + ' 롱 진입 size 계산 오류 002'
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_long', orderType='market', timeInForceValue='normal')
@@ -230,6 +230,7 @@ for i in userInfoList.index:
                 telegramMsg = name + ' 숏 종료 closeOrder 오류'
                 
             try:
+                time.sleep(0.05)
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
                 telegramMsg = name +'\n숏 청산 완료\n' + '숏 청산 AvgPrice : $' + str(closeOrderPrice)
             except:
