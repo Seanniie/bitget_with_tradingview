@@ -209,6 +209,7 @@ for i in userInfoList.index:
                 telegramMsg = name + ' 롱 종료 closeOrder 오류'
                 
             try:
+                time.sleep(0.05)
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
                 telegramMsg = name +'\n롱 청산 완료\n' + '롱 청산 AvgPrice : $' + str(closeOrderPrice)
             except:
