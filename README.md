@@ -60,7 +60,11 @@ sudo chmod 2775 /var/autobot
 find /var/autobot -type d -exec sudo chmod 2775 {} \;
 
 //이거필수
-sudo -u apache python3 /var/autobot/GetWebhook.py
+sudo -u apache python3 /var/autobot/main_seannie.py
 
 -- 텔레그램 봇
 sudo pip3 install python-telegram-bot --upgrade
+
+sudo pip3 install pandas
+
+sudo pip3 install pickle-mixin

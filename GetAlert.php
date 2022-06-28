@@ -8,7 +8,7 @@
     #$data = '{"side":"shortentry"}';
     #$data = '{"side":"shortexit"}';
 
-    $command = "python3 /var/AutoBinance_dev/main_seannie.py ". escapeshellarg($data);
+    $command = "python3 /var/autobot/main_seannie.py ". escapeshellarg($data);
     exec($command, $output, $return_var);
     $json_array = json_encode($output);
     echo $json_array

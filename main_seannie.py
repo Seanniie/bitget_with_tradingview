@@ -1,9 +1,6 @@
 import json
 import sys
-import pickle
 import pandas as pd
-#import pprint
-import my_key_raw
 import time
 import bitget.mix.market_api as market
 import bitget.mix.account_api as accounts
@@ -12,9 +9,6 @@ import bitget.mix.order_api as order
 import bitget.mix.plan_api as plan
 import bitget.mix.trace_api as trace
 import telegram
-# import myBitget
-# import ende_key  #암복호화키
-# import my_key    # 시크릿 액세스키
 
 ###
 
@@ -38,7 +32,6 @@ print(data)
 
 #유저 정보들 불러옴
 userInfoList = pd.read_pickle("userInfoList.pkl")
-
 ###########반복문 시작################
 for i in userInfoList.index:
     try:
@@ -88,7 +81,7 @@ for i in userInfoList.index:
         long_qty = positioninfo['data'][0]['available']
         short_qty = positioninfo['data'][1]['available']
     except:
-        bot.sendMessage(chat_id = chat_id, text=name + ' 롱, 숏 현재 물량 체크')
+        bot.sendMessage(chat_id = chat_id, text=name + ' 롱, 숏 현재 물량 체크 오류')
 ################################################################################################################
 
     #주문 평단 계산
@@ -151,6 +144,7 @@ for i in userInfoList.index:
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_long', orderType='market', timeInForceValue='normal')
+                time.sleep(0.05)
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
                 telegramMsg = name +'\n롱 진입 완료\n' + '롱 진입 AvgPrice : $'+ str(openOrderPrice)
             except:
