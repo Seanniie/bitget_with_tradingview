@@ -10,7 +10,7 @@ import bitget.mix.plan_api as plan
 import bitget.mix.trace_api as trace
 import telegram
 
-bot = telegram.Bot(token='123:AAF3oscLU5z2rDzPFYd_oVe8eIjf7UqF-aA')
+bot = telegram.Bot(token='123:adf-aA')
 chat_id = -123
 #chat_id = 123
 
@@ -90,7 +90,7 @@ for i in userInfoList.index:
     def get_dealAvgPrice(orderId):
         try:
             openOrderDetail = orderApi.detail(symbol, orderId)
-            time.sleep(0.05)
+            time.sleep(0.1)
             avgprice = openOrderDetail['data']['priceAvg']
             return avgprice
         except:
@@ -130,6 +130,7 @@ for i in userInfoList.index:
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_long', 
                     orderType='market', timeInForceValue='normal')
+                time.sleep(0.1)
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
                 telegramMsg = (name +'\n숏 청산 완료\n' + '숏 청산 AvgPrice : $' 
                     + str(closeOrderPrice) + '\n------------------------------\n롱 진입 완료\n' 
@@ -146,7 +147,7 @@ for i in userInfoList.index:
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_long', orderType='market', timeInForceValue='normal')
-                time.sleep(0.05)
+                time.sleep(0.1)
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
                 telegramMsg = name +'\n롱 진입 완료\n' + '롱 진입 AvgPrice : $'+ str(openOrderPrice)
             except:
@@ -173,7 +174,7 @@ for i in userInfoList.index:
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_short', orderType='market', timeInForceValue='normal')
-                time.sleep(0.05)
+                time.sleep(0.1)
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
                 telegramMsg = (name +'\n롱 청산 완료\n' + '롱 청산 AvgPrice : $' + 
                     str(closeOrderPrice) + '\n------------------------------\n숏 진입 완료\n' 
@@ -189,7 +190,7 @@ for i in userInfoList.index:
             
             try:
                 openOrder = orderApi.place_order(symbol, marginCoin, size, side='open_short', orderType='market', timeInForceValue='normal')
-                time.sleep(0.05)
+                time.sleep(0.1)
                 openOrderPrice = get_dealAvgPrice(openOrder['data']['orderId'])
                 telegramMsg = name +'\n숏 진입 완료\n' + '숏 진입 AvgPrice : $'+ str(openOrderPrice)
             except:
@@ -209,7 +210,7 @@ for i in userInfoList.index:
                 telegramMsg = name + ' 롱 종료 closeOrder 오류'
                 
             try:
-                time.sleep(0.05)
+                time.sleep(0.1)
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
                 telegramMsg = name +'\n롱 청산 완료\n' + '롱 청산 AvgPrice : $' + str(closeOrderPrice)
             except:
@@ -229,7 +230,7 @@ for i in userInfoList.index:
                 telegramMsg = name + ' 숏 종료 closeOrder 오류'
                 
             try:
-                time.sleep(0.05)
+                time.sleep(0.1)
                 closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
                 telegramMsg = name +'\n숏 청산 완료\n' + '숏 청산 AvgPrice : $' + str(closeOrderPrice)
             except:
