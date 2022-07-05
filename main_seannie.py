@@ -10,13 +10,13 @@ import bitget.mix.plan_api as plan
 import bitget.mix.trace_api as trace
 import telegram
 
-bot = telegram.Bot(token='5465825333:AAF3oscLU5z2rDzPFYd_oVe8eIjf7UqF-aA')
+bot = telegram.Bot(token='123:AAF3oscLU5z2rDzPFYd_oVe8eIjf7UqF-aA')
 
 #Jun room
-chat_id = -1001634448671 
+chat_id = -123 
 
-#chat_id = -1001382521972 #Seannie 전용 방
-#chat_id = 1624289906 #Bot room
+#chat_id = -123 #Seannie 전용 방
+#chat_id = 123 #Bot room
 
 #레버리지
 leverage = 1
