@@ -38,6 +38,7 @@ print(data)
 
 #유저 정보들 불러옴
 userInfoList = pd.read_pickle("userInfoList.pkl")
+
 ###########반복문 시작################
 for i in userInfoList.index:
     try:
