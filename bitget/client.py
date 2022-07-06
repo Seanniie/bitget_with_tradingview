@@ -1,7 +1,6 @@
 import requests
 import json
 from . import consts as c, utils, exceptions
-from datetime import datetime
 
 
 class Client(object):
@@ -46,29 +45,19 @@ class Client(object):
         # send request
         response = None
         if method == c.GET:
-            try:
-                response = requests.get(url, headers=header)
-            except ValueError:
-                print(datetime.now().strftime("%Y/%m/%d, %H:%M:%S"), url, '!!!api return none!!!')
-                return None
-            # response = requests.get(url, headers=header)
-            if response is None:
-                print(datetime.now().strftime("%Y/%m/%d, %H:%M:%S"), url, '!!!api return none!!!')
-                return None
-            # print("response : ",response.text)
+            response = requests.get(url, headers=header)
+            print("response : ",response.text)
         elif method == c.POST:
             response = requests.post(url, data=body, headers=header)
-            # print("response : ",response.text)
+            print("response : ",response.text)
             #response = requests.post(url, json=body, headers=header)
         elif method == c.DELETE:
             response = requests.delete(url, headers=header)
 
-        # print("status:", response.status_code)
+        print("status:", response.status_code)
         # exception handle
         if not str(response.status_code).startswith('2'):
-            # raise exceptions.BitgetAPIException(response)
-            print(datetime.now().strftime("%Y/%m/%d, %H:%M:%S"), url, '!!!api error!!!', response)  #여기
-            return None
+            raise exceptions.BitgetAPIException(response)
         try:
             res_header = response.headers
             if cursor:
@@ -95,6 +84,6 @@ class Client(object):
         url = c.API_URL + c.SERVER_TIMESTAMP_URL
         response = requests.get(url)
         if response.status_code == 200:
-            return response.json()['timestamp']
+            return response.json()['data']
         else:
             return ""
