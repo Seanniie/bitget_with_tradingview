@@ -204,47 +204,7 @@ for i in userInfoList.index:
             except:
                 telegramMsg = name + ' 숏 진입 openorder 오류 002'
                 
-        bot.sendMessage(chat_id=chat_id, text=telegramMsg)  
-
-    #롱 종료
-    elif data['side'] == "longexit":
-        if(float(long_qty)==0):
-            telegramMsg = name +'\n보유 중인 롱 포지션이 없습니다.'
-            pass
-        else:
-            try:
-                closeOrder = orderApi.place_order(symbol, marginCoin, size=long_qty, side='close_long', orderType='market', timeInForceValue='normal')    
-            except:
-                telegramMsg = name + ' 롱 종료 closeOrder 오류'
-                
-            try:
-                time.sleep(0.1)
-                closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
-                telegramMsg = name +'\n롱 청산 완료\n' + '롱 청산 AvgPrice : $' + str(closeOrderPrice)
-            except:
-                telegramMsg = name + ' 롱 종료 closeOrderPrice 오류'
-            
-        bot.sendMessage(chat_id = chat_id, text=telegramMsg)
-
-    #숏 종료
-    elif data['side'] == "shortexit":
-        if(float(short_qty)==0):
-            telegramMsg = name +'\n보유 중인 숏 포지션이 없습니다.'
-            pass
-        else:
-            try:
-                closeOrder = orderApi.place_order(symbol, marginCoin, size=short_qty, side='close_short', orderType='market', timeInForceValue='normal')    
-            except:
-                telegramMsg = name + ' 숏 종료 closeOrder 오류'
-                
-            try:
-                time.sleep(0.1)
-                closeOrderPrice = get_dealAvgPrice(closeOrder['data']['orderId'])
-                telegramMsg = name +'\n숏 청산 완료\n' + '숏 청산 AvgPrice : $' + str(closeOrderPrice)
-            except:
-                telegramMsg = name + ' 숏 종료 closeOrderPrice 오류'
-                
-        bot.sendMessage(chat_id = chat_id, text=telegramMsg)
+        bot.sendMessage(chat_id=chat_id, text=telegramMsg)
 
     #bot.sendMessage(chat_id = chat_id, text=str(time.time()-start) + 's 소요')
     
