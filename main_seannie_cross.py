@@ -28,7 +28,7 @@ sizePer = 0.9
 symbol = 'SBTCSUSDT_SUMCBL'
 marginCoin = 'SUSDT'
 productType = 'sumcbl'
-
+stoploss_percent = 1
 ################################################################################################################
 data = json.loads(sys.argv[1])
 print(data)
@@ -117,9 +117,26 @@ for i in userInfoList.index:
 
     #롱진입
     if data['side'] == "longentry":
-        if(float(long_qty)!=0):
-            telegramMsg = name +'\n이미 보유 중인 롱 포지션이 있습니다. 요청 취소됨.'
-            pass
+        if(float(long_qty)==0 and float(short_qty)==0):
+            try:
+                size = get_size(productType)
+                size70 = size*0.7
+                size30 = size*0.3
+            except:
+                telegramMsg = name + ' LongEntry Size 계산 오류'
+            #my_key_raw.py 내꺼만 남겨두고 테스트해보자
+            try:
+                openLongOrder = orderApi.place_order(symbol, marginCoin, size70, side='open_long', orderType='market', timeInForceValue='normal')
+                openLongOrderPrice = get_dealAvgPrice(openLongOrder['data']['orderId'])
+                telegramMsg = name +'\n롱 진입 완료\n' + '롱 진입 AvgPrice : $'+ str(openLongOrderPrice)
+                time.sleep(0.1)
+                openShortOrder = orderApi.place_order(symbol, marginCoin, size30, side='open_short', orderType='market', timeInForceValue='normal')
+                openShortOrderPrice = get_dealAvgPrice(openShortOrder['data']['orderId'])
+                telegramMsg = name +'\n숏 진입 완료\n' + '숏 진입 AvgPrice : $'+ str(openShortOrderPrice)
+                openShortStopOrder = orderApi.place_order(symbol, marginCoin, size30, price = openShortOrderPrice*(100-stoploss_percent)/100 , side='close_short', orderType='limit', timeInForceValue='normal')
+                telegramMsg = name +'\n숏 1% 익절 주문 완료'
+            except:
+                telegramMsg = name + ' 롱진입 openorder 오류 002'
         elif(float(short_qty)!=0):
             try:
                 closeOrder = orderApi.place_order(symbol, marginCoin, size=short_qty, side='close_short', orderType='market', timeInForceValue='normal')
