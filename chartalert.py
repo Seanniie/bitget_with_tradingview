@@ -10,13 +10,13 @@ ttshortexitstring = "{\n\"side\":\"shortexit\"}"
 uselongentryalert = input(defval=true, title="Use LONG ENTRY Alert", group="Alert Messages")
 longentrystring  = input(title="Buy Alert Message",  defval=ttlongentrystring,  type=input.string, confirm=false, group="Alert Messages", tooltip=ttlongentrystring)
 
-useshortentryalert = input(defval=true, title="Use SELL Alert", group="Alert Messages")
+useshortentryalert = input(defval=true, title="Use SHORT ENTRY Alert", group="Alert Messages")
 shortentrystring = input(title="Sell Alert Message", defval=ttshortentrystring, type=input.string, confirm=false, group="Alert Messages", tooltip=ttshortentrystring)
 
-uselongexitalert = input(defval=true, title="Use SELL Alert", group="Alert Messages")
+uselongexitalert = input(defval=true, title="Use LONG EXIT Alert", group="Alert Messages")
 longexitstring = input(title="Sell Alert Message", defval=ttlongexitstring, type=input.string, confirm=false, group="Alert Messages", tooltip=ttlongexitstring)
 
-useshortexitalert = input(defval=true, title="Use SELL Alert", group="Alert Messages")
+useshortexitalert = input(defval=true, title="Use SHORT EXIT Alert", group="Alert Messages")
 shortexitstring = input(title="Sell Alert Message", defval=ttshortexitstring, type=input.string, confirm=false, group="Alert Messages", tooltip=ttshortexitstring)
 
 // usestopalert = input(defval=true, title="Use STOP Alert", group="Alert Messages")
