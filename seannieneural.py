@@ -873,7 +873,7 @@ longpositions = input(title='Long Positions', defval=true)
 shortpositions = input(title='Short Positions', defval=true)
 
 //Stop Loss Warning Option
-stoplosspercent = input(title='Stop Loss Warning (%)', defval=-0.8, minval=-50, maxval=0, step=.1) / 100
+stoplosspercent = input(title='Stop Loss Warning (%)', defval=-0.7, minval=-50, maxval=0, step=.1) / 100
 
 //Score Requirements
 stronglongscore = input(defval=10, minval=0, maxval=1000, title='Required Strong LONG Score')
@@ -916,7 +916,7 @@ psardirupstatus = psardirup ? 'PSAR Direction Up' : na
 psardirdown = psar > close ? psardirimportance : 0
 psardirdownstatus = psardirdown ? 'PSAR Direction Down' : na
 
-psarrevimportance = input(defval=2, minval=0, maxval=100, title='Parabolic SAR Reversal Importance')
+psarrevimportance = input(defval=3, minval=0, maxval=100, title='Parabolic SAR Reversal Importance')
 psarrevup = psar < close and psar[1] > close[1] ? psarrevimportance : 0
 psarrevupstatus = psarrevup ? 'PSAR Reversed Up' : na
 psarrevdown = psar > close and psar[1] < close ? psarrevimportance : 0
@@ -929,7 +929,7 @@ hmacloseposupstatus = hmacloseposup ? 'Price Crossed Over HMA' : na
 hmacloseposdown = hma > close ? hmacloseposimportance : 0
 hmacloseposdownstatus = hmacloseposdown ? 'Price Crossed Under HMA' : na
 
-hmapivotimportance = input(defval=5, minval=0, maxval=100, title='HMA Pivot Importance')
+hmapivotimportance = input(defval=1, minval=0, maxval=100, title='HMA Pivot Importance')
 hmapivotup = hma > hma[1] and hma[1] < hma[2] ? hmapivotimportance : 0
 hmapivotupstatus = hmapivotup ? 'HMA Pivot Up' : na
 hmapivotdown = hma < hma[1] and hma[1] > hma[2] ? hmapivotimportance : 0
@@ -938,13 +938,13 @@ hmapivotdownstatus = hmapivotdown ? 'HMA Pivot Down' : na
 //Momentum Indicator Signals////////////////////////////////////////////////////
 
 //RSI Signals
-rsidivimportance = input(defval=4, minval=0, maxval=100, title='RSI Divergence Importance')
+rsidivimportance = input(defval=2, minval=0, maxval=100, title='RSI Divergence Importance')
 rsidivup = bullCond11 or bullCond11[1] or bullCond11[2] ? rsidivimportance : 0
 rsidivupstatus = rsidivup ? 'Bullish RSI Divergence' : na
 rsidivdown = bearCond11 or bearCond11[1] or bearCond11[2] ? rsidivimportance : 0
 rsidivdownstatus = rsidivdown ? 'Bearish RSI Divergence' : na
 
-rsilevelimportance = input(defval=2, minval=0, maxval=100, title='RSI Level Importance')
+rsilevelimportance = input(defval=0, minval=0, maxval=100, title='RSI Level Importance')
 rsioversold = osc11 < 30 ? rsilevelimportance : 0
 rsioversoldstatus = rsioversold ? 'RSI Oversold' : na
 rsioverbought = osc11 > 70 ? rsilevelimportance : 0
@@ -957,7 +957,7 @@ rsicrossdown = osc11 < 50 and osc11[1] > 50 or osc11 < 50 and osc11[2] > 50 ? rs
 rsicrossdownstatus = rsicrossdown ? 'RSI Crossed 50-Line Down' : na
 
 //MACD Signals
-macddivimportance = input(defval=7, minval=0, maxval=100, title='MACD Divergence Importance')
+macddivimportance = input(defval=4, minval=0, maxval=100, title='MACD Divergence Importance')
 macddivup = bullCond12 or bullCond12[1] or bullCond12[2] ? macddivimportance : 0
 macddivupstatus = macddivup ? 'Bullish MACD Divergence' : na
 macddivdown = bearCond12 or bearCond12[1] or bearCond12[2] ? macddivimportance : 0
@@ -976,20 +976,20 @@ macdcrosssignaldown = macd < signal and macd[1] > signal[1] and signal > 0 ? mac
 macdcrosssignaldownstatus = macdcrosssignaldown ? 'MACD Crossed Signal Down' : na
 
 //WaveTrend Signals
-wtdivimportance = input(defval=3, minval=0, maxval=100, title='WaveTrend Divergence Importance')
+wtdivimportance = input(defval=0, minval=0, maxval=100, title='WaveTrend Divergence Importance')
 wtdivup = bullCond13 or bullCond13[1] or bullCond13[2] ? wtdivimportance : 0
 wtdivupstatus = wtdivup ? 'Bullish WaveTrend Divergence' : na
 wtdivdown = bearCond13 or bearCond13[1] or bearCond13[2] ? wtdivimportance : 0
 wtdivdownstatus = wtdivdown ? 'Bearish WaveTrend Divergence' : na
 
-wtcrosssignalimportance = input(defval=2, minval=0, maxval=100, title='WaveTrend Cross Signal Importance')
+wtcrosssignalimportance = input(defval=0, minval=0, maxval=100, title='WaveTrend Cross Signal Importance')
 wtcrosssignalup = wt1 > wt2 and wt1[1] < wt2[1] and wt2 < -10 ? wtcrosssignalimportance : 0
 wtcrosssignalupstatus = wtcrosssignalup ? 'WaveTrend Crossed Signal Up' : na
 wtcrosssignaldown = wt1 < wt2 and wt1[1] > wt2[1] and wt2 > 10 ? wtcrosssignalimportance : 0
 wtcrosssignaldownstatus = wtcrosssignaldown ? 'WaveTrend Crossed Signal Down' : na
 
 //Stochastic Signals
-sdivimportance = input(defval=2, minval=0, maxval=100, title='Stochastic Divergence Importance')
+sdivimportance = input(defval=4, minval=0, maxval=100, title='Stochastic Divergence Importance')
 sdivup = bullCond14 or bullCond14[1] or bullCond14[2] ? sdivimportance : 0
 sdivupstatus = sdivup ? 'Bullish Stoch Divergence' : na
 sdivdown = bearCond14 or bearCond14[1] or bearCond14[2] ? sdivimportance : 0
@@ -1005,14 +1005,14 @@ scrosssignaldownstatus = scrosssignaldown ? 'Stoch Crossed Signal Down' : na
 //Volatility Indicators/////////////////////////////////////////////////////////
 
 //Bollinger Bands Signals
-bbcontimportance = input(defval=5, minval=0, maxval=100, title='BollingerBands Contact Importance')
+bbcontimportance = input(defval=1, minval=0, maxval=100, title='BollingerBands Contact Importance')
 bbcontup = close < lower ? bbcontimportance : 0
 bbcontupstatus = bbcontup ? 'Price Contacted Lower BB' : na
 bbcontdown = open > upper ? bbcontimportance : 0
 bbcontdownstatus = bbcontdown ? 'Price Contacted Upper BB' : na
 
 //Average True Range Signals
-atrrevimportance = input(defval=2, minval=0, maxval=100, title='ATR Reversal Importance')
+atrrevimportance = input(defval=0, minval=0, maxval=100, title='ATR Reversal Importance')
 atrrevup = buySignal ? atrrevimportance : 0
 atrrevupstatus = atrrevup ? 'ATR Reversed Up' : na
 atrrevdown = sellSignal ? atrrevimportance : 0
@@ -1041,7 +1041,7 @@ srcrossdownstatus = srcrossdown ? 'Crossed Key Level Down' : na
 //Volume Indicator Signals//////////////////////////////////////////////////////
 
 //On Balance Volume Divergence Signals
-obvdivimportance = input(defval=7, minval=0, maxval=100, title='OBV Divergence Importance')
+obvdivimportance = input(defval=6, minval=0, maxval=100, title='OBV Divergence Importance')
 obvdivup = bullCond18 or bullCond18[1] or bullCond18[2] ? obvdivimportance : 0
 obvdivupstatus = obvdivup ? 'Bullish OBV Divergence' : na
 obvdivdown = bearCond18 or bearCond18[1] or bearCond18[2] ? obvdivimportance : 0
@@ -1061,7 +1061,7 @@ cmflevdown = cmf < 0 ? cmflevimportance : 0
 cmflevdownstatus = cmflevdown ? 'CMF Level Down' : na
 
 //VWAP Signals
-vwapcrossimportance = input(defval=2, minval=0, maxval=100, title='VWAP Cross HMA Importance')
+vwapcrossimportance = input(defval=1, minval=0, maxval=100, title='VWAP Cross HMA Importance')
 vwapcrossup = hma < vwapValue and hma[1] > vwapValue[1] ? vwapcrossimportance : 0
 vwapcrossupstatus = vwapcrossup ? 'VWAP Crossed Above HMA' : na
 vwapcrossdown = hma > vwapValue and hma[1] < vwapValue[1] ? vwapcrossimportance : 0

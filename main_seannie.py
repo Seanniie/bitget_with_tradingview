@@ -25,9 +25,9 @@ leverage = 1
 sizePer = 0.9
 
 #필요 변수
-symbol = 'SBTCSUSDT_SUMCBL'
-marginCoin = 'SUSDT'
-productType = 'sumcbl'
+symbol = 'BTCUSDT_UMCBL'
+marginCoin = 'USDT'
+productType = 'umcbl'
 
 ################################################################################################################
 data = json.loads(sys.argv[1])
